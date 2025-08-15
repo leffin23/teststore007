@@ -1,0 +1,44 @@
+<div class="flex" style="display: flex; justify-content: center; align-items: center; flex-direction: column; gap: 20px; padding: 20px;">
+	<button id="variantABtn" class="button ">
+	Select variant A emails
+	</button>
+
+	<button id="variantBBtn" class="button ">
+	Select variant B emails
+	</button>
+
+</div>
+
+
+
+<script>
+    addNotificationsAttribute = (attributes) => {
+	try {
+		console.log('Customer note:', attributes);
+		fetch('/cart/update.js', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify({ attributes }),
+			keepalive: true,
+		}).then((response) => {
+			if (!response.ok) {
+				console.log('Failed to update cart note:', response);
+			} else {
+				console.log('Cart note updated successfully', response);
+			}
+		});
+	} catch (error) {
+		console.error('Error adding customer note:', error);
+	}
+};
+
+document.getElementById("variantBBtn").addEventListener("click", function() {
+  addNotificationsAttribute({ notification: "variantB" });
+});
+
+document.getElementById("variantABtn").addEventListener("click", function() {
+  addNotificationsAttribute({ notification: "variantA" });
+});
+</script>

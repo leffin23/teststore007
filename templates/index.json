@@ -86,6 +86,10 @@
         "padding-block-end": 48
       }
     },
+    "test_abtest":{
+      "type": "test-abtest",
+      "blocks": {},
+    },
     "product_list_qU3bEB": {
       "type": "product-list",
       "blocks": {
@@ -342,6 +346,7 @@
   },
   "order": [
     "hero_jVaWmY",
+    "test_abtest",
     "product_list_qU3bEB"
   ]
 }
