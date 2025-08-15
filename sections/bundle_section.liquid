@@ -1,0 +1,74 @@
+{% assign bundle_levels = product.metafields.custom.bundle_levels.value %}
+{% comment %} {% for level in bundle_levels %}
+  <pre>{{ level | json }}</pre>
+{% endfor %} {% endcomment %}
+<div id="bundle-builder">
+  <form method="post" action="/cart/add">
+    <input type="hidden" name="id" value="{{ product.variants.first.id }}">
+    {% for level in bundle_levels %}
+      <div class="bundle-level" data-min="{{ level.min }}" data-max="{{ level.max }}">
+        <h3>{{ level.pdp_level_title }}</h3>
+        
+        {% for v in level.level_products.value %}
+          <label>
+            {{ v.product.title }} – {{ v.title }}
+            <input type="number" name="variant_{{ v.id }}" min="0" value="0">
+          </label>
+        {% endfor %}
+      </div>
+    {% endfor %}
+
+    <button type="submit">Add Bundle to Cart</button>
+  </form>
+</div>
+
+<script>
+  const form = document.querySelector('#bundle-builder form');
+
+  form.addEventListener('submit', async function (e) {
+    e.preventDefault(); // prevent form from submitting immediately
+    console.log('Form submitted');
+    const levels = document.querySelectorAll('.bundle-level');
+    const components = [];
+
+    levels.forEach(level => {
+      const inputs = level.querySelectorAll('input[type="number"]');
+      inputs.forEach(input => {
+        const quantity = parseInt(input.value, 10);
+        if (quantity > 0) {
+          components.push({
+            id: 'gid://shopify/ProductVariant/' + input.name.replace('variant_', ''),
+            quantity
+          });
+        }
+      });
+    });
+
+    // 1. Set the cart attribute _components
+    fetch('/cart/update.js', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        attributes: {
+          _components: JSON.stringify(components)
+        }
+      }),
+      keepalive: true
+    })
+    .then((response) => {
+      if (!response.ok) {
+        console.log('Failed to update cart attributes:', response);
+      } else {
+        console.log('Cart attributes updated successfully', response);
+        // 2. Submit the form after setting attribute
+        form.submit();
+      }
+    })
+    .catch((error) => {
+      console.error('Error updating cart attributes:', error);
+    });
+  });
+</script>
+

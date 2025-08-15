@@ -474,6 +474,11 @@
         "padding-block-end": 0
       }
     },
+    "bundle_section": {
+          "type": "bundle_section",
+          "name": "Bundle section",
+          "blocks": {}
+    },
     "product_recommendations_qggXJq": {
       "type": "product-recommendations",
       "blocks": {
@@ -675,6 +680,7 @@
   },
   "order": [
     "main",
+    "bundle_section",
     "product_recommendations_qggXJq"
   ]
 }
