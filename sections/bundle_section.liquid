@@ -63,12 +63,23 @@
       } else {
         console.log('Cart attributes updated successfully', response);
         // 2. Submit the form after setting attribute
-        form.submit();
+        //form.submit();
       }
     })
     .catch((error) => {
       console.error('Error updating cart attributes:', error);
     });
+
+    const cartData = await fetch('/cart.js').then(res => res.json());
+
+    if (cartData.attributes && cartData.attributes._components) {
+      console.log('✅ Component attribute set:', cartData.attributes._components);
+
+      // Now safe to submit form or go to checkout
+      //form.submit();
+    } else {
+      console.error('❌ Attribute not set yet. Try again or retry.');
+    }
   });
 </script>
 
