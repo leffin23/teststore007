@@ -70,13 +70,20 @@
       console.error('Error updating cart attributes:', error);
     });
 
-    const cartData = await fetch('/cart.js').then(res => res.json());
-
-    if (cartData.attributes && cartData.attributes._components) {
-      console.log('✅ Component attribute set:', cartData.attributes._components);
-      form.submit();
+    return fetch('/cart/add.js', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        id: '{{ product.variants.first.id }}', // fill this with Liquid
+        quantity: 1,
+      }),
+    });
+  })
+  .then((res) => {
+    if (res.ok) {
+      window.location.href = '/cart'; // or to /checkout
     } else {
-      console.error('❌ Attribute not set yet. Try again or retry.');
+      console.error('Failed to add product:', res);
     }
   });
 </script>
