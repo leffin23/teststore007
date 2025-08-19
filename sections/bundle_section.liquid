@@ -12,7 +12,7 @@
         {% for v in level.level_products.value %}
           <label>
             {{ v.product.title }} – {{ v.title }}
-            <input type="number" name="variant_{{ v.id }}" min="0" value="0">
+            <input type="number" name="variant_{{ v.id }}" min="0" value="0" data-price="{{ v.price | money_without_currency | replace: ',', '.' }}">
           </label>
         {% endfor %}
       </div>
@@ -38,10 +38,12 @@
         if (quantity > 0) {
           components.push({
             id: 'gid://shopify/ProductVariant/' + input.name.replace('variant_', ''),
-            quantity
+            quantity,
+            price:  parseFloat(input.dataset.price)
           });
         }
       });
+      console.log('Components for level:', components);
     });
 
     // 1. Set the cart attribute _components
@@ -74,7 +76,7 @@
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        id: '{{ product.variants.first.id }}', // fill this with Liquid
+        id: '{{ product.variants.first.id }}', 
         quantity: 1,
       }),
     });
