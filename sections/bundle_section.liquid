@@ -25,67 +25,60 @@
 <script>
   const form = document.querySelector('#bundle-builder form');
 
-  form.addEventListener('submit', async function (e) {
-    e.preventDefault(); // prevent form from submitting immediately
-    console.log('Form submitted');
-    const levels = document.querySelectorAll('.bundle-level');
-    const components = [];
+  form.addEventListener('submit', function (e) {
+  e.preventDefault();
+    console.log('Form');
+    
+  const levels = document.querySelectorAll('.bundle-level');
+  const components = [];
 
-    levels.forEach(level => {
-      const inputs = level.querySelectorAll('input[type="number"]');
-      inputs.forEach(input => {
-        const quantity = parseInt(input.value, 10);
-        if (quantity > 0) {
-          components.push({
-            id: 'gid://shopify/ProductVariant/' + input.name.replace('variant_', ''),
-            quantity,
-          });
-        }
-      });
-      console.log('Components for level:', components);
+  levels.forEach(level => {
+    const inputs = level.querySelectorAll('input[type="number"]');
+    inputs.forEach(input => {
+      const quantity = parseInt(input.value, 10);
+      if (quantity > 0) {
+        components.push({
+          id: 'gid://shopify/ProductVariant/' + input.name.replace('variant_', ''),
+          quantity,
+        });
+      }
     });
+      console.log('Components for level:', components);
+  });
 
     // 1. Set the cart attribute _components
-    fetch('/cart/update.js', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        attributes: {
-          _components: JSON.stringify(components)
-        }
-      }),
-      keepalive: true
-    })
-    .then((response) => {
-      if (!response.ok) {
-        console.log('Failed to update cart attributes:', response);
-      } else {
-        console.log('Cart attributes updated successfully', response);
-        // 2. Submit the form after setting attribute
-        //form.submit();
+  fetch('/cart/update.js', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      attributes: {
+        _components: JSON.stringify(components)
       }
-    })
-    .catch((error) => {
-      console.error('Error updating cart attributes:', error);
-    });
-
+    }),
+    keepalive: true
+  })
+  .then((res) => {
+    if (!res.ok) throw new Error('Cart attribute update failed.');
     return fetch('/cart/add.js', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        id: '{{ product.variants.first.id }}', 
+        id: '{{ product.variants.first.id }}',
         quantity: 1,
       }),
     });
   })
   .then((res) => {
     if (res.ok) {
-      window.location.href = '/cart'; // or to /checkout
+      window.location.href = '/cart';
     } else {
       console.error('Failed to add product:', res);
     }
+  })
+  .catch((err) => {
+    console.error('Error in submission flow:', err);
   });
+});
+
 </script>
 
