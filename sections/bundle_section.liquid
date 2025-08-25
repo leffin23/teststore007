@@ -13,7 +13,8 @@
           <label>
             {{ v.product.title }} – {{ v.title }}
             <input type="number" name="variant_{{ v.id }}" min="0" value="0" data-price="{{ v.price | money_without_currency | replace: ',', '.' }}">
-          </label>
+            <span class="price">{{ v.price | money }}</span> ⃣⃣⃣⃣⃣⃣
+            </label>
         {% endfor %}
       </div>
     {% endfor %}
@@ -67,6 +68,7 @@
         quantity: 1,
       }),
     });
+    console.log('Cart attributes updated successfully.');
   })
   .then((res) => {
     if (res.ok) {
