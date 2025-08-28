@@ -47,38 +47,28 @@
       console.log('Components for level:', components);
   });
 
-    // 1. Set the cart attribute _components
-  fetch('/cart/update.js', {
+  fetch('/cart/add.js', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
-      attributes: {
-        _components: JSON.stringify(components)
-      }
+      items: [
+        {
+          id: '{{ product.variants.first.id }}', // Bundle product variant
+          quantity: 1,
+          properties: {
+            _components: JSON.stringify(components) // Attach as line item property
+          }
+        }
+      ]
     }),
-    keepalive: true
   })
-  .then((res) => {
-    if (!res.ok) throw new Error('Cart attribute update failed.');
-    return fetch('/cart/add.js', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        id: '{{ product.variants.first.id }}',
-        quantity: 1,
-      }),
-    });
-    console.log('Cart attributes updated successfully.');
-  })
-  .then((res) => {
-    if (res.ok) {
-      window.location.href = '/cart';
-    } else {
-      console.error('Failed to add product:', res);
-    }
+  .then((res) => res.json())
+  .then((data) => {
+    console.log('Bundle added:', data);
+    window.location.href = '/cart';
   })
   .catch((err) => {
-    console.error('Error in submission flow:', err);
+    console.error('Error adding bundle:', err);
   });
 });
 
