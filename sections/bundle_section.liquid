@@ -47,6 +47,7 @@
       console.log('Components for level:', components);
   });
 
+  const uniqueKey = Date.now().toString();
   fetch('/cart/add.js', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
@@ -56,6 +57,7 @@
           id: '{{ product.variants.first.id }}', // Bundle product variant
           quantity: 1,
           properties: {
+            _bundle_unique_key: uniqueKey, // Unique key to identify the bundle
             _components: JSON.stringify(components) // Attach as line item property
           }
         }
