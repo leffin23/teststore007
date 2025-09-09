@@ -58,7 +58,8 @@
           quantity: 1,
           properties: {
             _bundle_unique_key: uniqueKey, // Unique key to identify the bundle
-            _components: JSON.stringify(components) // Attach as line item property
+            _components: JSON.stringify(components),
+            _bundle_type: "item"
           }
         }
       ]
