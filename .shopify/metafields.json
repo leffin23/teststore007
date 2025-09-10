@@ -58,16 +58,6 @@
         "name": "list.metaobject_reference",
         "category": "REFERENCE"
       }
-    },
-    {
-      "key": "bundle_variants_json",
-      "namespace": "custom",
-      "name": "Bundle variants json",
-      "description": "",
-      "type": {
-        "name": "json",
-        "category": "JSON"
-      }
     }
   ],
   "variant": [
