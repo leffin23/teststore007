@@ -79,6 +79,13 @@
         "type": "shopify://apps/weglot-translate-your-store/blocks/weglot/3097482a-fafe-42ff-bc33-ea19e35c4a20",
         "disabled": false,
         "settings": {}
+      },
+      "3418223220453551085": {
+        "type": "shopify://apps/fad-auto-discounts/blocks/install-snippets/4b6810b7-b33d-468c-9916-327aeb4c800b",
+        "disabled": false,
+        "settings": {
+          "fad_v2_call": ""
+        }
       }
     },
     "color_schemes": {
