@@ -12,6 +12,10 @@
     "main": {
       "type": "product-information",
       "blocks": {
+        "fad_auto_discounts_fad_display_offers_QrNjqa": {
+          "type": "shopify://apps/fad-auto-discounts/blocks/FAD-display-offers/4b6810b7-b33d-468c-9916-327aeb4c800b",
+          "settings": {}
+        },
         "media-gallery": {
           "type": "_product-media-gallery",
           "static": true,
@@ -26,9 +30,10 @@
             "thumbnail_position": "right",
             "thumbnail_width": 44,
             "aspect_ratio": "1/1.25",
+            "constrain_to_viewport": false,
+            "media_fit": "cover",
             "media_radius": 0,
             "extend_media": true,
-            "constrain_to_viewport": false,
             "zoom": true,
             "video_loop": false,
             "hide_variants": true,
@@ -95,6 +100,7 @@
                 "border_width": 1,
                 "border_opacity": 100,
                 "border_radius": 0,
+                "placeholder": "",
                 "toggle_overlay": false,
                 "overlay_color": "#00000026",
                 "overlay_style": "solid",
@@ -188,6 +194,7 @@
               "settings": {
                 "stacking": true,
                 "show_pickup_availability": false,
+                "gift_card_form": true,
                 "padding-block-start": 0,
                 "padding-block-end": 0,
                 "padding-inline-start": 0,
@@ -246,6 +253,7 @@
                 "border_width": 1,
                 "border_opacity": 100,
                 "border_radius": 0,
+                "placeholder": "",
                 "toggle_overlay": false,
                 "overlay_color": "#00000026",
                 "overlay_style": "solid",
@@ -285,6 +293,7 @@
                     "border_width": 1,
                     "border_opacity": 100,
                     "border_radius": 0,
+                    "placeholder": "",
                     "toggle_overlay": false,
                     "overlay_color": "#00000026",
                     "overlay_style": "solid",
@@ -367,6 +376,7 @@
                     "border_width": 1,
                     "border_opacity": 100,
                     "border_radius": 0,
+                    "placeholder": "",
                     "toggle_overlay": false,
                     "overlay_color": "#00000026",
                     "overlay_style": "solid",
@@ -463,6 +473,9 @@
           ]
         }
       },
+      "block_order": [
+        "fad_auto_discounts_fad_display_offers_QrNjqa"
+      ],
       "settings": {
         "content_width": "content-center-aligned",
         "desktop_media_position": "left",
@@ -475,9 +488,9 @@
       }
     },
     "bundle_section": {
-          "type": "bundle_section",
-          "name": "Bundle section",
-          "blocks": {}
+      "type": "bundle_section",
+      "name": "Bundle section",
+      "settings": {}
     },
     "product_recommendations_qggXJq": {
       "type": "product-recommendations",
