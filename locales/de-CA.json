@@ -1,0 +1,45 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin language editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "shopify": {
+    "checkout": {
+      "shipping": {
+        "title": "Versand",
+        "shipping_method_title": "Versand",
+        "waiting_on_rate_notice": "Verfügbare Versandtarife werden abgerufen …",
+        "no_rates_for_country_notice": "Für diese Adresse wurden keine Versandtarife gefunden.",
+        "please_enter_your_shipping_information_notice": "Bitte gib deine Lieferdaten ein.",
+        "delivery_title": "Lieferadresse"
+      },
+      "contact": {
+        "shipping_address_title": "Lieferadresse"
+      },
+      "delivery_options": {
+        "shipping_address": "Lieferadresse"
+      },
+      "order_summary": {
+        "shipping_label": "Versand",
+        "free_shipping_discount_label": "Kostenfreier Versand"
+      },
+      "review": {
+        "blocks": {
+          "shipping_address_title": "Liefern an"
+        }
+      },
+      "thank_you": {
+        "marker": {
+          "shipping": "Lieferadresse",
+          "current": "Derzeitiger Standort der Sendung"
+        },
+        "shipping_address_title": "Lieferadresse"
+      }
+    }
+  }
+}
