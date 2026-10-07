@@ -9,6 +9,7 @@ class AccordionCustom extends HTMLElement {
     if (!(details instanceof HTMLDetailsElement)) throw new Error('Details element not found');
 
     return details;
+    //test
   }
 
   /** @type {HTMLElement} */
