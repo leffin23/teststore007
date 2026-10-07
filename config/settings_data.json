@@ -91,6 +91,18 @@
         "type": "shopify://apps/stack-discounts-pro/blocks/app-embed/42061352-3816-430f-b7f9-d8d92f58c694",
         "disabled": false,
         "settings": {}
+      },
+      "15351435345818755577": {
+        "type": "shopify://apps/pandectes-gdpr/blocks/banner/58c0baa2-6cc1-480c-9ea6-38d6d559556a",
+        "disabled": false,
+        "settings": {
+          "fast_load": false
+        }
+      },
+      "18171216174956455555": {
+        "type": "shopify://apps/delivery-pickup/blocks/odd-block/80605365-b4f4-42ba-9b84-3d39984a49dc",
+        "disabled": false,
+        "settings": {}
       }
     },
     "color_schemes": {
