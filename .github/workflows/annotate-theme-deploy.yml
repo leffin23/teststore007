@@ -1,0 +1,32 @@
+# Put this into the theme repo. Runs on push to the live branch (and manually for testing).
+# Repo secrets: ANNOTATE_URL (https://annotations.<sub>.workers.dev/annotate), ANNOTATE_SECRET
+name: Shopify Annotation – Theme Deploy
+
+on:
+  push:
+    branches: [main]   # branch connected to the live theme
+  workflow_dispatch:   # "Run workflow" button for testing
+    inputs:
+      title:
+        description: "Annotation title"
+        default: "Test: GitHub Action"
+
+jobs:
+  annotate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create annotation
+        env:
+          ANNOTATE_URL: ${{ secrets.ANNOTATE_URL }}
+          ANNOTATE_SECRET: ${{ secrets.ANNOTATE_SECRET }}
+          MSG: ${{ github.event.head_commit.message || inputs.title }}
+          SHA: ${{ github.sha }}
+          ACTOR: ${{ github.actor }}
+        run: |
+          TITLE="Theme deploy: $(echo "$MSG" | head -n1 | cut -c1-55)"
+          jq -n --arg t "$TITLE" --arg d "Commit ${SHA:0:7} by $ACTOR" \
+            '{type:"other", title:$t, description:$d, suppressThemePoll:true}' \
+          | curl -sS --fail-with-body -X POST "$ANNOTATE_URL" \
+              -H "Authorization: Bearer $ANNOTATE_SECRET" \
+              -H "Content-Type: application/json" \
+              --data @-
